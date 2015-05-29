@@ -26,7 +26,7 @@ public class PackageToImports {
 		data = new HashMap<String, Set<String>>();
 	}
 	
-	public void addPackage(String packagaStr) {
+	public String addPackage(String packagaStr) {
 		boolean found = false;
 		Set<Map.Entry<String, Set<String>>> set = data.entrySet();
 		Iterator it = set.iterator();
@@ -36,13 +36,23 @@ public class PackageToImports {
 			String curPackage = entry.getKey();
 			if (curPackage.startsWith(packagaStr) == true) {
 				replacePackage(packagaStr, curPackage);
-				found = true;
+				return packagaStr;
 			} else if (packagaStr.startsWith(curPackage) == true) {
-				found = true;
+				return curPackage;
 			}
 		}
 		if(found == false) {
 			newPackage(packagaStr);
 		}
+		return packagaStr;
+	}
+	
+	public void addImport(String packageStr, String importStr) {
+		Set<String> packageData = data.get(packageStr);
+		packageData.add(importStr);
+	}
+	
+	public Map<String, Set<String>> getResult() {
+		return data;
 	}
 }

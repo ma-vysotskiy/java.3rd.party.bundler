@@ -21,5 +21,6 @@ file.list
 file.list~
 
 tmpFile.txt
+sortedResult.txt
 
 *.*~
